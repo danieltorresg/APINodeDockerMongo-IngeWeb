@@ -1,0 +1,29 @@
+version: "2"
+services:
+  app:
+    container_name: apinode
+    restart: always
+    build: .
+    ports:
+      - "4000:4000"
+    networks:
+      - mongito
+    depends_on: 
+      - mongo
+  mongo:
+    container_name: studentsApi
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks: 
+      - mongito
+    volumes: 
+      - dbdata:/data/db
+networks: 
+  mongito:
+      external: true
+volumes: 
+  dbdata: 
+      external: true
+
+
